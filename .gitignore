@@ -1,0 +1,10 @@
+.out
+~
+.so
+.o
+.out
+temp/
+CMakeFiles/
+/Debug/
+.project
+.cproject
