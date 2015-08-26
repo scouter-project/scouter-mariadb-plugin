@@ -57,7 +57,7 @@ bool ifs_global_status_reader::init_table(THD* thd) {
 	lex_start(thd);
 	mysql_init_select(thd->lex);
 	//is_spotter->table_name= tbl_name;
-	is_spotter->table_name= "spotter_g_status";
+	is_spotter->table_name= "spotter_status";
 	tables.init_one_table(INFORMATION_SCHEMA_NAME.str,
 						 INFORMATION_SCHEMA_NAME.length,
 						 is_spotter->table_name,
