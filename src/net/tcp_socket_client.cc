@@ -46,9 +46,10 @@ void tcp_socket_client::sock_init() {
 }
 
 void tcp_socket_client::close() {
-	if(is_connect) {
+	/*if(is_connect) {
 		::close(sockfd);
-	}
+	}*/
+	::close(sockfd);
 	is_connect = false;
 
 }

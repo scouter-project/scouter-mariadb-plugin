@@ -90,6 +90,9 @@ bool command_manager::connect() {
 			delete tcp_sock;
 			tcp_sock = 0;
 		}
+	} else {
+		delete tcp_sock;
+		tcp_sock = 0;
 	}
 	return connected;
 
