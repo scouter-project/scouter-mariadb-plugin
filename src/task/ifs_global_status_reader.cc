@@ -29,6 +29,7 @@ ifs_global_status_reader::ifs_global_status_reader(void* p,std::string name) {
 	last_read_time = 0;
 	init_filter();
 	init_fields();
+	diff_sec = interval;
 
 }
 
@@ -142,7 +143,7 @@ bool ifs_global_status_reader::read() {
 	tables.table = 0;
 	if(last_read_time != 0) {
 		int32_t current_time = get_seconds();
-		interval = current_time - last_read_time;
+		diff_sec = current_time - last_read_time;
 		last_read_time = current_time;
 	} else {
 		last_read_time = get_seconds();
@@ -285,7 +286,8 @@ uint64_t ifs_global_status_reader::calc_delta(std::string key,	std::map<std::str
 	if(old_val > new_val) {
 			old_val = new_val;
 	}
-	return (new_val - old_val) / interval;
+
+	return (new_val - old_val) / diff_sec;
 }
 
 int32_t ifs_global_status_reader::get_seconds() {

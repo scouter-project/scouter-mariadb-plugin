@@ -46,6 +46,7 @@ private:
 	std::map<std::string,uint64_t*> value_map;
 	bool first_read;
 	int32_t last_read_time;
+	int diff_sec;
 
 
 public:
