@@ -30,7 +30,7 @@ pfs_event_stmt_summary_reader::~pfs_event_stmt_summary_reader() {
 }
 
 bool pfs_event_stmt_summary_reader::read() {
-
+	//sql_print_information("spotter-start data read...table name:%s",tblname);
 	READ_RECORD read_record_info;
 	tables.init_one_table(STRING_WITH_LEN(dbname), STRING_WITH_LEN(tblname),
 													tblname, TL_READ);
@@ -144,10 +144,12 @@ bool pfs_event_stmt_summary_reader::read() {
 	  //table->m_needs_reopen= TRUE;
 		table->file->inited = handler::NONE;
 	  close_mysql_tables(thd);// Force close to free memory
+	  //sql_print_information("spotter-end data read...table name:%s",tblname);
 
 	 }else {
 		 free_root(&mem_field,MYF(0));
 	 }
+
 	DBUG_RETURN(true);
 
 }

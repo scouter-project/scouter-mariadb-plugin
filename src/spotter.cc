@@ -55,7 +55,6 @@ pthread_handler_t run(void *arg __attribute__((unused)))
 	spotter_observer = new observer();
 	spotter_observer->set_interval(5);
 	spotter_observer->run(NULL);
-
 	my_thread_end();
   pthread_exit(0);
   return 0;
@@ -134,7 +133,7 @@ static MYSQL_SYSVAR_INT(stmt_current_interval,stmt_current_interval,PLUGIN_VAR_R
 												NULL,NULL,2,1,60,1);
 static MYSQL_SYSVAR_INT(stmt_summary_interval,stmt_summary_interval,PLUGIN_VAR_RQCMDARG,
 												"interval of reading events_statements_summary_by_digest table.",
-												NULL,NULL,10,10,120,1);
+												NULL,NULL,30,10,120,1);
 static MYSQL_SYSVAR_INT(lock_interval,lock_interval,PLUGIN_VAR_RQCMDARG,
 												"interval of reading innodb lock information",
 												NULL,NULL,2,1,60,1);

@@ -1,4 +1,4 @@
-# Copyright (c) 2006, 2011, Oracle and/or its affiliates. All rights reserved.
+
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 
 include_directories( ${CMAKE_SOURCE_DIR}/plugin/spotter/src/include )
 
-set(LIBS /home/windfree/workspace/ws-mariadb/mariadb-10.0.20/libmysqld/libmysqld.so)
+#set(LIBS /home/windfree/workspace/ws-mariadb/mariadb-10.0.20/libmysqld/libmysqld.so)
 
 ADD_DEFINITIONS(-DNO_EMBEDDED_ACCESS_CHECKS)
 
@@ -99,7 +99,7 @@ SET(SPOTTER_SOURCES
    )
 
 ADD_DEFINITIONS(-DMYSQL_DYNAMIC_PLUGIN  )
-target_link_libraries(spotter ${LIBS})
+#target_link_libraries(spotter ${LIBS})
 MYSQL_ADD_PLUGIN(spotter ${SPOTTER_SOURCES}
   									 MODULE_OUTPUT_NAME "libspotter"
   									  )

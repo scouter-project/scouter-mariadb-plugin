@@ -43,6 +43,7 @@ int pfs_reader::execute(void* p) {
 			thd = 0;
 			set_current_thd(0);
 		}
+		sql_print_information("spotter gathering thread exit...table name:%s",tblname);
 	}
 
  my_thread_end();
