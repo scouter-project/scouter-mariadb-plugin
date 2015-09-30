@@ -14,6 +14,7 @@ namespace spotter {
 
 class util {
 	static int hash_table[];
+	static int64_t next_key;
 public:
 	virtual ~util();
 	static uint64_t htonll(uint64_t val);
@@ -24,6 +25,7 @@ public:
 	static std::string to_string(int64_t num);
 	static uint64_t get_seconds(const char* time, const char* format);
 	static bool sleep(int32_t sec);
+	static int64_t get_next_key();
 
 };
 

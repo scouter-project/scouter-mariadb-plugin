@@ -1,10 +1,11 @@
 export INCLUDE=-I/home/windfree/workspace/ws-mariadb/spotter/src/include \
         -I/home/windfree/workspace/gtest-1.7.0/include \
-        -I/home/windfree/workspace/ws-mariadb/mariadb-10.0.20/sql 
-export FLAGS= -m64 -c -o 
+        -I/home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.20/sql
+export FLAGS= -m64 -c -o
 export LIBPATH=-L/home/windfree/workspace/gtest-1.7.0/output \
-    -L/home/windfree/workspace/ws-mariadb/mariadb-10.0.20/plugin/spotter/src \
-    -L/home/windfree/workspace/ws-mariadb/mariadb-10.0.20/libmysqld 
+    -L/home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.20/plugin/spotter/src \
+    -L/home/windfree/workspace/ws-mariadb/maria-release/mariadb-10.0.20-linux-x86_64-dev/lib
+
 export LIB=-lgtest -lpthread -lspotter -lmysqld
 export CC=g++ -g
 #DIRS=io_test net_test value_test packet_test util_test

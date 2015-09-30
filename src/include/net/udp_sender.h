@@ -27,13 +27,12 @@ private :
 	std::vector<data_output*> buffer_vector ;
 	std::queue<pack*> data_queue;
 	static void* start_thread(void* p);
-	char SINGLE_PACK[4];
-	char MULTI_PACK[4];
+
 	void run();
 
 	bool running;
-	void send(pack* pk);
-	void send(std::vector<data_output*> outs);
+
+	//void send(std::vector<data_output*> outs);
 	void send_multi_pack(int pack_count);
 	struct sockaddr_in sock_addr;
 
@@ -47,6 +46,9 @@ public:
 	void set_addr(char* addr, int port); //only use for test case.
 	void start();
 	socket_client* get_socket();
+	void set_socket(udp_socket_client* udp_sock);
+	void send(std::vector<data_output*>& outs);
+	void send(pack* pk);
 };
 
 } /* namespace spotter */

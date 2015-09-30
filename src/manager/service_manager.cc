@@ -51,12 +51,12 @@ void service_manager::start() {
 	task_list.push_back(ifs_gstatus_reader);
 
 	task* pfs_current_stmt_reader = new pfs_event_stmt_current_reader();
-	pfs_current_stmt_reader->set_interval(stmt_current_interval) ; // set interval to 1 sec.
+	pfs_current_stmt_reader->set_interval(stmt_current_interval) ;
 	pfs_current_stmt_reader->run(NULL);
 	task_list.push_back(pfs_current_stmt_reader);
 
 	task* pfs_summary_stmt_reader = new pfs_event_stmt_summary_reader();
-	pfs_summary_stmt_reader->set_interval(stmt_summary_interval) ; // set interval to 1 sec.
+	pfs_summary_stmt_reader->set_interval(stmt_summary_interval) ;
 	pfs_summary_stmt_reader->run(NULL);
 	task_list.push_back(pfs_summary_stmt_reader);
 

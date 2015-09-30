@@ -18,9 +18,9 @@
 namespace spotter {
 
 data_output::data_output() {
-	buffer= new char[32];
+	buffer= new char[128];
 	offset = 0;
-	buffer_length = 32;
+	buffer_length = 128;
 
 }
 

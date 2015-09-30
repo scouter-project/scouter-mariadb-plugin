@@ -133,7 +133,7 @@ static MYSQL_SYSVAR_INT(stmt_current_interval,stmt_current_interval,PLUGIN_VAR_R
 												NULL,NULL,2,1,60,1);
 static MYSQL_SYSVAR_INT(stmt_summary_interval,stmt_summary_interval,PLUGIN_VAR_RQCMDARG,
 												"interval of reading events_statements_summary_by_digest table.",
-												NULL,NULL,30,10,120,1);
+												NULL,NULL,10,10,120,1);
 static MYSQL_SYSVAR_INT(lock_interval,lock_interval,PLUGIN_VAR_RQCMDARG,
 												"interval of reading innodb lock information",
 												NULL,NULL,2,1,60,1);
