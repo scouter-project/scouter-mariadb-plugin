@@ -26,6 +26,8 @@ public:
 	bool connect();
 	bool is_connected();
 	int send(char* buffer,int32_t len);
+	int send_multi_packet(char* buffer, int32_t len);
+	int send_multi_packet(int64_t key, int32_t total,int32_t num, int packet_size, char* buffer);
 	void set_addr(sockaddr* addr);
 };
 

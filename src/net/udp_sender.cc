@@ -13,6 +13,7 @@
 #include "config/configure.h"
 #include <unistd.h>
 #include "common/spotter_var.h"
+#include "net/net_constants.h"
 namespace spotter {
 
 udp_sender* udp_sender::instance = NULL;
@@ -21,15 +22,7 @@ udp_sender::udp_sender() {
 	running = false;
 	udp = new udp_socket_client();
 	thread_id = -1;
-	SINGLE_PACK[0]='J';
-	SINGLE_PACK[1]='A';
-	SINGLE_PACK[2]='V';
-	SINGLE_PACK[3]='A';
 
-	MULTI_PACK[0]='J';
-	MULTI_PACK[1]='A';
-	MULTI_PACK[2]='V';
-	MULTI_PACK[3]='N';
 
 }
 
@@ -124,8 +117,8 @@ void udp_sender::run() {
 		if(data_queue.size() == 1 ) {
 			pack* pk = data_queue.front();
 			send(pk);
-			delete pk;
 			data_queue.pop();
+			delete pk;
 		}else if(data_queue.size() > 1) {
 		 send_multi_pack(queue_size);
 	   }
@@ -147,31 +140,52 @@ void udp_sender::stop() {
 
 void udp_sender::send(pack* pk) {
 	data_output* out = new data_output();
-	out->write_bytes(SINGLE_PACK,4);
+	out->write_bytes(net_constants::SINGLE_PACK,4);
 	char* buffer = out->write_pack(pk)->to_byte_array();
 	int len = out->get_offset();
 	udp->send(buffer,len);
 	//::send(sockfd,buffer,len,0	);
 	delete out;
-	delete buffer;
+	delete[] buffer;
 }
 
 
-void udp_sender::send(std::vector<data_output*> outs) {
-	data_output* out = new data_output();
-	out->write_bytes(MULTI_PACK,4);
-	int size = buffer_vector.size();
-	out->write_int16(size);
-	for(int i = 0; i < size; i++) {
-		data_output* temp_out = buffer_vector[i];
-		char* buffer = temp_out->to_byte_array();
-		out->write_bytes(buffer,temp_out->get_offset()	);
-		delete temp_out;
+void udp_sender::send(std::vector<data_output*>& outs) {
+	int size = outs.size();
+	if(size == 0) {
+		return;
+	} else if(size == 1) { //multi 로 보내려고 그랬으나 하나의 pack 이  udp max size 를 초과했을 때
+		data_output* out = new data_output();
+		out->write_bytes(net_constants::SINGLE_PACK,4);
+		data_output* temp = outs[0];
+		char* buffer = temp->to_byte_array();
+		out->write_bytes(buffer,temp->get_offset());
+		char* send_buffer = out->to_byte_array();
+		udp->send(send_buffer,out->get_offset());
+		delete out;
+		out = 0;
+		delete[] send_buffer;
 		delete[] buffer;
+		delete temp;
+		temp = 0;
+	} else if(size > 1){
+		data_output* out = new data_output();
+		out->write_bytes(net_constants::MULTI_PACK,4);
+		out->write_int16(size);
+		for(int i = 0; i < size; i++) {
+			data_output* temp_out = outs[i];
+			char* buffer = temp_out->to_byte_array();
+			out->write_bytes(buffer,temp_out->get_offset()	);
+			delete temp_out;
+			temp_out = 0;
+			delete[] buffer;
+		}
+		char* send_buffer = out->to_byte_array();
+		udp->send(send_buffer,out->get_offset());
+		delete[] send_buffer;
+		delete out;
+		out = 0;
 	}
-	char* send_buffer = out->to_byte_array();
-	udp->send(send_buffer,out->get_offset());
-	buffer_vector.clear();
 
 }
 
@@ -183,24 +197,20 @@ void udp_sender::send_multi_pack(int pack_count) {
 		pack* pk = data_queue.front();
 		out->write_pack(pk);
 		int buff_size = out->get_offset();
-		if(buff_size > configure::MAX_PACKET_SIZE) {  // if single pack size exceeds max_packet_size, ignore that pack.
-			data_queue.pop();
-			delete pk;
-			delete out;
-		}else {
-			size += buff_size;
-			if(size > configure::MAX_PACKET_SIZE){
-				send(buffer_vector);
-				size = 0;
-				delete out;
-			}else {
-				buffer_vector.push_back(out);
-				data_queue.pop();
-				delete pk;
-			}
+		//**
+		if(size + buff_size > configure::MAX_PACKET_SIZE) {
+			send(buffer_vector);
+			size = 0;
+			buffer_vector.clear();
 		}
+		size += buff_size;
+		buffer_vector.push_back(out);
+		data_queue.pop();
+		delete pk;
+
 	}
 	send(buffer_vector);
+	buffer_vector.clear();
 }
 
 bool udp_sender::is_running() {
@@ -216,6 +226,9 @@ void udp_sender::set_addr(char* addr, int port) {
 socket_client* udp_sender::get_socket() {
 	return udp;
 }
-
+//for test only method
+void udp_sender::set_socket(udp_socket_client* udp_sock) {
+	udp = udp_sock	;
+}
 
 } /* namespace spotter */

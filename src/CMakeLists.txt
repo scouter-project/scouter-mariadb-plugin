@@ -47,6 +47,7 @@ SET(SPOTTER_SOURCES
  include/net/tcp_socket_client.h
  include/net/net_proxy.h
  include/net/udp_sender.h
+ include/net/net_constants.h
  include/value/value.h
  include/value/value_constants.h
  include/value/null_value.h
@@ -85,6 +86,7 @@ SET(SPOTTER_SOURCES
  net/tcp_socket_client.cc
  net/net_proxy.cc
  net/udp_sender.cc
+ net/net_constants.cc
  value/value.cc
  value/value_constants.cc
  value/null_value.cc
@@ -96,6 +98,7 @@ SET(SPOTTER_SOURCES
  config/configure.cc
  manager/service_manager.cc
  manager/command_manager.cc
+ 
    )
 
 ADD_DEFINITIONS(-DMYSQL_DYNAMIC_PLUGIN  )
