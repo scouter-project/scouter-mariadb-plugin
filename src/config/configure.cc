@@ -10,8 +10,8 @@
 namespace spotter {
 configure* configure::instance;
 pthread_mutex_t configure::mutex;
-//int32_t configure::MAX_PACKET_SIZE = 60000;
-int32_t configure::MAX_PACKET_SIZE = 200;
+int32_t configure::MAX_PACKET_SIZE = 60000;
+//int32_t configure::MAX_PACKET_SIZE = 200;
 configure::configure() {
 	this->debug_text = false;
 
