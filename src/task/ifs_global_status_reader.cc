@@ -298,11 +298,13 @@ int32_t ifs_global_status_reader::get_seconds() {
 
 
 int ifs_global_status_reader::execute(void* p) {
-	if (my_thread_init()) {
-				return 0;
-	}
+
 	if(slept_ok(interval)) {
+
 		while(slept_ok(interval)) {
+			if (my_thread_init()) {
+								return 0;
+			}
 			thd = new THD();
 			long begin_stack;
 			thd->thread_stack= (char*) &begin_stack;
@@ -311,10 +313,13 @@ int ifs_global_status_reader::execute(void* p) {
 			delete thd;
 			thd = 0;
 			set_current_thd(0);
+			my_thread_end();
+
 		}
+
 	}
 
- my_thread_end();
+
  pthread_exit(0);
  return 0;
 }
