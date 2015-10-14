@@ -75,6 +75,7 @@ void task::stop() {
 	}
 	mysql_mutex_destroy(&sleep_mutex);
 	mysql_cond_destroy(&sleep_condition);
+
 }
 
 void task::set_interval(int val) {
