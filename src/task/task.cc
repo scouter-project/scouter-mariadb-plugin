@@ -55,7 +55,7 @@ void task::run(void* p) {
 		mysql_cond_destroy(&sleep_condition);
 		mysql_mutex_destroy(&sleep_mutex);
 		sql_print_error("Could not create spotter reader thread!\n");
-		exit(0);
+		//exit(0);
 	}
 	is_running = true;
 }

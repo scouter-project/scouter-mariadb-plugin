@@ -70,8 +70,8 @@ void* command_manager::start_thread(void* p) {
 void command_manager::run() {
 	if(!connected) {
 		if (pthread_create(&thread_id, 0, start_thread,(void *) this)!= 0) {
-			sql_print_error("Could not create spotter command manager thread!\n");
-			exit(0);
+			sql_print_error("Could not create spotter command manager thread! errno:%d\n",errno);
+			//exit(0);
 		}
 	}
 }
