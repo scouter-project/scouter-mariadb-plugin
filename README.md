@@ -14,7 +14,7 @@ Maridb plugin for scouter
        (currently working well in maria 10.0.21 version )
     2. tar zxvf mariadb-10.0.21.tar.gz 
     3. cd mariadb-10.0.21/plugin
-    4. download spotter plugin source (git clone http://github.com/scouter)
+    4. download scouter-maradb-plugin source (git clone https://github.com/scouter-project/scouter-mariadb-plugin)
     5. cd .. ( mariadb root path)
     6. in Redhat or CentOS box,install following basic build package
         git
