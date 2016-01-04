@@ -9,3 +9,7 @@ CMakeFiles/
 .project
 .cproject
 release
+*.log
+release
+scp.sh
+configure.scan
