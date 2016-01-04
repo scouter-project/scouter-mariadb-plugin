@@ -2,16 +2,16 @@
 MariaDB Plugin for Scouter
 
 
-Maridb plugin for scouter
+Mariadb plugin for scouter
 ==============================================
+Current version has been tested in Mariadb version 10.0.20 and 10.0.21.
+We will support for other versions soon.
 
-
+**preInstallation Task**
 **Build**
-
-  * MariaDB Source build 
+    
     1. Download mariadb source from maria site (https://downloads.mariadb.org/ or mirror site 
         ftp://ftp.kaist.ac.kr/mariadb/mariadb-10.0.21/source/mariadb-10.0.21.tar.gz)
-       (currently working well in maria 10.0.21 version )
     2. tar zxvf mariadb-10.0.21.tar.gz 
     3. cd mariadb-10.0.21/plugin
     4. download scouter-maradb-plugin source (git clone https://github.com/scouter-project/scouter-mariadb-plugin)
@@ -31,8 +31,7 @@ Maridb plugin for scouter
      CentOS,Redhat> yum install git gunzip gcc gcc-g++ make bison libcurses zlib-dev cmake jemalloc 
 
      7. in maria source root 
-       >cmake -DBUILD_CONFIG=mysql_release -DCMAKE_BUILD_TYPE=debug -DWITH_JEMALLOC=no . ( debugging mode )
-       (if you build scouter plugin with debugging mode ,you should use maria server with debugging mode )
+       >cmake -DBUILD_CONFIG=mysql_release -DWITH_JEMALLOC=no . 
 
      8. cd mariadb-10.0.21/plugin
      9. make 
