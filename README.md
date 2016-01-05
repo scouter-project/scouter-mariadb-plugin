@@ -1,13 +1,25 @@
 # scouter-mariadb-plugin
 MariaDB Plugin for Scouter
 
+ 
 
 Mariadb plugin for scouter
 ==============================================
+This is alpha version, so we recommand to use test Environments.
+
 Current version has been tested in Mariadb version 10.0.20 and 10.0.21.
 We will support for other versions soon.
 
+
+**Feature**
+
+1. Plugin for mariadb monitoring on scouter apm tool env.
+2. No SQL Method, it use API Function in MariaDB source
+3. So Minimun resource use ( 0.5% lower cpu, 1% lower memory)
+4. Easy install & uninstall ( it's mariadb plugin)
+
 **preInstallation Task**
+
 **Build**
     
     1. Download mariadb source from maria site (https://downloads.mariadb.org/ or mirror site 
