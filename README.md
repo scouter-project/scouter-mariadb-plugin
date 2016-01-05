@@ -18,67 +18,98 @@ We will support for other versions soon.
 3. So Minimun resource use ( 0.5% lower cpu, 1% lower memory)
 4. Easy install & uninstall ( it's mariadb plugin)
 
-**preInstallation Task**
+## Preinstallation Task
 
-**Build**
+### Software requirements
+
+Verify that the following software is installed on your system:
+
+   * git
+   * gunzip
+   * GNU tar
+   * gcc 2.95.2 or later
+   * g++
+   * GNU make 3.75 or later
+   * bison (2.0 for MariaDB 5.5)
+   * libncurses
+   * zlib-dev
+   * cmake
+   * jemalloc 
+
+On Linux you can get those programs with your package manager. An easy way to install the needed programs on Linux is to run one of the following commands(depending on your Linux distribution)
+```sh
+  sudo apt-get build-dep mysql-server # for Debian and Ubuntu-based distributions
+  sudo yum-builddep mysql # for Fedora 17-18 (part of the yum-utils package)
+  sudo yum-builddep mariadb # for Fedora 19+ (part of the yum-utils package)
+  sudo zypper si -d mysql-community-server # for OpenSUSE   
+```
+
+### System requirements
+Scouter-mariadb-plugin sends performance data to Scouter server via socket. Verify that network ports open.
+   * 6100 / tcp, udp  (source : mariadb server, target : scouter server)
+
+
+
+
+## Build
     
-    1. Download mariadb source from maria site (https://downloads.mariadb.org/ or mirror site 
+   1. Download mariadb source from maria site (https://downloads.mariadb.org/ or mirror site 
         ftp://ftp.kaist.ac.kr/mariadb/mariadb-10.0.21/source/mariadb-10.0.21.tar.gz)
-    2. tar zxvf mariadb-10.0.21.tar.gz 
-    3. cd mariadb-10.0.21/plugin
-    4. download scouter-maradb-plugin source (git clone https://github.com/scouter-project/scouter-mariadb-plugin)
-    5. cd .. ( mariadb root path)
-    6. in Redhat or CentOS box,install following basic build package
-        git
-        gunzip
-        GNU tar
-        gcc 2.95.2 or later
-        g++
-        GNU make 3.75 or later
-        bison (2.0 for MariaDB 5.5)
-        libncurses
-        zlib-dev
-        cmake
-        jemalloc 
-     CentOS,Redhat> yum install git gunzip gcc gcc-g++ make bison libcurses zlib-dev cmake jemalloc 
+   2. unzip source file
+   
+   ```sh
+   tar zxvf mariadb-xxx.xxx.xxx.tar.gz  (xxx means mariadb version)
+   ```
+   3. download scouter-maradb-plugin source. *<<mariadb-source-dir>>* is a mariadb source directory.
+    
+   ```sh
+    cd <<mariadb-source-dir>>/plugin                            
+    git clone https://github.com/scouter-project/scouter-mariadb-plugin
+   ```
+   4. Run **cmake** command in the mariadb source directory.
+   
+   ```sh
+   cd <<maraiadb-soucrce-dir>>
+   cmake -DBUILD_CONFIG=mysql_release -DWITH_JEMALLOC=no . 
+   ```
+   5. Run **make** command in the scouter-mariadb-plugin source directory.
+   
+   ```sh
+   cd <<mariadb-source-dir>>/plugin/scouter-mariadb-plugin
+   make 
+   ```
+   If make runs successfully, you'll find libspotter.so file in the \<<mariadb-source-dir\>>/plugin/scouter-mariadb-plugin/src.
+ 
+  
+ 
+## Install
+   1. Copy scouter-mariadb-plugin library to mariadb plugin directory. \<<mariadb-install-dir\>> is a mariadb installation directory.
+   
+   ```sh
+        cd <<mariadb-source-dir>>/plugin/scouter-mariadb-plugin/src
+        cp libspotter.so <<mariadb-install-dir>>/lib/plugin
+   ```
+      
+   2. A plugin located in a plugin library file can be loaded at runtime with the INSTALL PLUGIN statement. 
+   
+   ```sh
+     INSTALL PLUGIN spotter SONAME 'libspotter.so';
+   ```
+   3. Setting system global variable for scouter server ip address
+   
+   ```sh
+   show variables like 'spotter%'
+   set global spotter_server_ip="xxx.xxx.xxx.xxx";
+   ```
 
-     7. in maria source root 
-       >cmake -DBUILD_CONFIG=mysql_release -DWITH_JEMALLOC=no . 
+## Uninstall plugin 
+To uninstall scouter-mariadb-plugin, use UNINSTALL PLUGIN command.
 
-     8. cd mariadb-10.0.21/plugin
-     9. make 
-        will make libspotter.so 
-
-     
-
-
-**Install:**
-
-  * 1. cp libspotter.so  in maria server install directory 
-    ( ex /opt/mariadb-10.0.21-linux-x86_64/lib/plugin)
-    2. vi /etc/my.cnf
-     and add 
-     spotter_server_ip="10.3.0.102"    // your scouter server ip 
-     spotter_server_tcp_port ="6100"   // default 
-    3. in mysql daemon
-     > INSTALL PLUGIN spotter SONAME 'libspotter.so';
-     > show plugins;                   // will display libspotter.so
-     if uninstall 
-     >UNINSTALL PLUGIN spotter;
-    4. restart mariadb service 
-
-
-
-**License**
+```sh
+   uninstall plugin spotter;
+```
+    
+## License
 
 Maridb plugin for scouter is specifically available only under version 2 of the GNU
 General Public License (GPLv2)
-
-
-
-
-
-
-
-
-
