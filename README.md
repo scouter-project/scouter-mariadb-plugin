@@ -78,12 +78,12 @@ Scouter-mariadb-plugin sends performance data to Scouter server via socket. Veri
    cd [[mariadb-source-dir]]/plugin/scouter-mariadb-plugin
    make 
    ```
-   If make runs successfully, you'll find libspotter.so file in the \[[mariadb-source-dir\]]/plugin/scouter-mariadb-plugin/src.
+   If make runs successfully, you'll find libspotter.so file in the [[mariadb-source-dir]]/plugin/scouter-mariadb-plugin/src.
  
   
  
 ## Install
-   1. Copy scouter-mariadb-plugin library to mariadb plugin directory. \[[mariadb-install-dir\]] is a mariadb installation directory.
+   1. Copy scouter-mariadb-plugin library to mariadb plugin directory. [[mariadb-install-dir]] is a mariadb installation directory.
    
    ```sh
         cd [[mariadb-source-dir]]/plugin/scouter-mariadb-plugin/src
