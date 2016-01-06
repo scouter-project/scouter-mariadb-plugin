@@ -60,7 +60,7 @@ Scouter-mariadb-plugin sends performance data to Scouter server via socket. Veri
    ```sh
    tar zxvf mariadb-xxx.xxx.xxx.tar.gz  (xxx means mariadb version)
    ```
-   3. download scouter-maradb-plugin source. *<<mariadb-source-dir>>* is a mariadb source directory.
+   3. download scouter-maradb-plugin source. [mariadb-source-dir] is a mariadb source directory.
     
    ```sh
     cd <<mariadb-source-dir>>/plugin                            
