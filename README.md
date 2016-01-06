@@ -60,34 +60,34 @@ Scouter-mariadb-plugin sends performance data to Scouter server via socket. Veri
    ```sh
    tar zxvf mariadb-xxx.xxx.xxx.tar.gz  (xxx means mariadb version)
    ```
-   3. download scouter-maradb-plugin source. *<<mariadb-source-dir>>* is a mariadb source directory.
+   3. download scouter-maradb-plugin source. [[mariadb-source-dir]] is a mariadb source directory.
     
    ```sh
-    cd <<mariadb-source-dir>>/plugin                            
+    cd [[mariadb-source-dir]]/plugin                            
     git clone https://github.com/scouter-project/scouter-mariadb-plugin
    ```
    4. Run **cmake** command in the mariadb source directory.
    
    ```sh
-   cd <<maraiadb-soucrce-dir>>
+   cd [[maraiadb-soucrce-dir]]
    cmake -DBUILD_CONFIG=mysql_release -DWITH_JEMALLOC=no . 
    ```
    5. Run **make** command in the scouter-mariadb-plugin source directory.
    
    ```sh
-   cd <<mariadb-source-dir>>/plugin/scouter-mariadb-plugin
+   cd [[mariadb-source-dir]]/plugin/scouter-mariadb-plugin
    make 
    ```
-   If make runs successfully, you'll find libspotter.so file in the \<<mariadb-source-dir\>>/plugin/scouter-mariadb-plugin/src.
+   If make runs successfully, you'll find libspotter.so file in the \[[mariadb-source-dir\]]/plugin/scouter-mariadb-plugin/src.
  
   
  
 ## Install
-   1. Copy scouter-mariadb-plugin library to mariadb plugin directory. \<<mariadb-install-dir\>> is a mariadb installation directory.
+   1. Copy scouter-mariadb-plugin library to mariadb plugin directory. \[[mariadb-install-dir\]] is a mariadb installation directory.
    
    ```sh
-        cd <<mariadb-source-dir>>/plugin/scouter-mariadb-plugin/src
-        cp libspotter.so <<mariadb-install-dir>>/lib/plugin
+        cd [[mariadb-source-dir]]/plugin/scouter-mariadb-plugin/src
+        cp libspotter.so [[mariadb-install-dir]]/lib/plugin
    ```
       
    2. A plugin located in a plugin library file can be loaded at runtime with the INSTALL PLUGIN statement. 
