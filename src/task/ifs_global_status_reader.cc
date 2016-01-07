@@ -300,7 +300,6 @@ int32_t ifs_global_status_reader::get_seconds() {
 int ifs_global_status_reader::execute(void* p) {
 
 	if(slept_ok(interval)) {
-
 		while(slept_ok(interval)) {
 			if (my_thread_init()) {
 								return 0;
@@ -314,7 +313,6 @@ int ifs_global_status_reader::execute(void* p) {
 			thd = 0;
 			set_current_thd(0);
 			my_thread_end();
-
 		}
 
 	}

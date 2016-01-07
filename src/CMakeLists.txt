@@ -13,7 +13,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 
-include_directories( ${CMAKE_SOURCE_DIR}/plugin/spotter/src/include )
+include_directories( ${CMAKE_SOURCE_DIR}/plugin/scouter-mariadb-plugin/src/include )
 
 #set(LIBS /home/windfree/workspace/ws-mariadb/mariadb-10.0.20/libmysqld/libmysqld.so)
 
