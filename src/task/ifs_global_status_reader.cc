@@ -66,8 +66,8 @@ bool ifs_global_status_reader::init_table(THD* thd) {
 						 0, TL_READ);
 
 	tables.schema_table= is_spotter;
-	tables.table= is_spotter->create_table(thd, &tables);
-	//tables.table= create_schema_table(thd, &tables); after 10.1.X
+	tables.table= create_schema_table(thd, &tables); 
+		
 	if (!tables.table) {
 		return false;
 	}

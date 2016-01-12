@@ -47,10 +47,9 @@ bool ifs_innodb_locks_reader::init_ib_locks_table(THD* thd) {
 	ST_SCHEMA_TABLE* sch_ib_locks = find_schema_table(thd, "innodb_locks");
 
 	ib_locks_tblist.schema_table = sch_ib_locks;
-	ib_locks_tblist.table= is_spotter->create_table(thd, &ib_locks_tblist);
+	ib_locks_tblist.table= create_schema_table(thd, &ib_locks_tblist);
 	ib_locks_tblist.schema_table_name="innodb_locks";
 
-	//tables.table= create_schema_table(thd, &tables); after 10.1.X
 	if (!ib_locks_tblist.table) {
 		return false;
 	}
@@ -74,7 +73,7 @@ bool ifs_innodb_locks_reader::init_ib_lock_waits_table(THD* thd) {
 	ST_SCHEMA_TABLE* sch_ib_lock_wait = find_schema_table(thd, "innodb_lock_waits");
 
 	ib_lock_waits_tblist.schema_table = sch_ib_lock_wait;
-	ib_lock_waits_tblist.table=is_spotter->create_table(thd,&ib_lock_waits_tblist);
+	ib_lock_waits_tblist.table=create_schema_table(thd,&ib_lock_waits_tblist);
 	ib_lock_waits_tblist.schema_table_name="innodb_lock_waits";
 
 	if (!ib_lock_waits_tblist.table) {
@@ -100,7 +99,7 @@ bool ifs_innodb_locks_reader::init_ib_trx_table(THD* thd) {
 	ST_SCHEMA_TABLE* sch_ib_trx = find_schema_table(thd, "innodb_trx");
 
 	ib_trx_tblist.schema_table = sch_ib_trx;
-	ib_trx_tblist.table=is_spotter->create_table(thd,&ib_trx_tblist);
+	ib_trx_tblist.table=create_schema_table(thd,&ib_trx_tblist);
 	ib_trx_tblist.schema_table_name="innodb_trx";
 
 	if (!ib_trx_tblist.table) {
