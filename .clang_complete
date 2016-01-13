@@ -1,0 +1,13 @@
+-I/usr/include
+-I/usr/include/c++/4.4.4
+-I/usr/include/c++/4.4.4/backward
+-I/usr/include/c++/4.4.4/x86_64-redhat-linux
+-I/usr/lib/gcc/x86_64-redhat-linux/4.4.4/include
+-I/usr/local/include
+-I/home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.1.8/include
+-I/home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.1.8/sql
+-I/home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.1.8/dbug/
+-I/home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.1.8/storage/innobase/include
+-I/home/windfree/workspace/ws-mariadb/spotter/src/include
+
+

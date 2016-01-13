@@ -3,6 +3,7 @@
 *.so
 *.o
 *.out
+*.swp
 temp/
 CMakeFiles/
 /Debug/
