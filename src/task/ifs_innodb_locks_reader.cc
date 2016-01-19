@@ -21,8 +21,8 @@ namespace spotter {
 ifs_innodb_locks_reader::ifs_innodb_locks_reader(void* p,std::string name) {
 	tbl_name = name.c_str();
 	interval = 1; // default value
-	plugin_data = p;
-	is_spotter = (ST_SCHEMA_TABLE*)p;
+	plugin_data = p; // not used yet.
+	//is_spotter = (ST_SCHEMA_TABLE*)p;
 	init_column_nm();
 }
 
@@ -36,12 +36,10 @@ bool ifs_innodb_locks_reader::init_ib_locks_table(THD* thd) {
 	thd->security_ctx->master_access = 0x100; // to pass check_global_access() in sql_parse.cc
 	lex_start(thd);
 	mysql_init_select(thd->lex);
-	//is_spotter->table_name= tbl_name;
-	is_spotter->table_name= "spotter_lock_info";
 	ib_locks_tblist.init_one_table(INFORMATION_SCHEMA_NAME.str,
 						 INFORMATION_SCHEMA_NAME.length,
-						 is_spotter->table_name,
-						 strlen(is_spotter->table_name),
+						 "spotter_lock_info",
+						 strlen("spotter_lock_info"),
 						 0, TL_READ);
 
 	ST_SCHEMA_TABLE* sch_ib_locks = find_schema_table(thd, "innodb_locks");
@@ -62,12 +60,10 @@ bool ifs_innodb_locks_reader::init_ib_lock_waits_table(THD* thd) {
 	thd->security_ctx->master_access = 0x100; // to pass check_global_access() in sql_parse.cc
 	lex_start(thd);
 	mysql_init_select(thd->lex);
-	is_spotter->table_name= "spotter_lock_wait_info";
-
 	ib_lock_waits_tblist.init_one_table(INFORMATION_SCHEMA_NAME.str,
 							 INFORMATION_SCHEMA_NAME.length,
-							 is_spotter->table_name,
-							 strlen(is_spotter->table_name),
+							 "spotter_lock_wait_info",
+							 strlen("spotter_lock_wait_info"),
 							 0, TL_READ);
 
 	ST_SCHEMA_TABLE* sch_ib_lock_wait = find_schema_table(thd, "innodb_lock_waits");
@@ -88,12 +84,11 @@ bool ifs_innodb_locks_reader::init_ib_trx_table(THD* thd) {
 	thd->security_ctx->master_access = 0x100; // to pass check_global_access() in sql_parse.cc
 	lex_start(thd);
 	mysql_init_select(thd->lex);
-	is_spotter->table_name= "spotter_trx_info";
 
 	ib_trx_tblist.init_one_table(INFORMATION_SCHEMA_NAME.str,
 							 INFORMATION_SCHEMA_NAME.length,
-							 is_spotter->table_name,
-							 strlen(is_spotter->table_name),
+							 "spotter_trx_info",
+							 strlen("spotter_trx_info"),
 							 0, TL_READ);
 
 	ST_SCHEMA_TABLE* sch_ib_trx = find_schema_table(thd, "innodb_trx");

@@ -29,12 +29,8 @@ private:
 	TABLE* table;
 	THD* thd;
 	const char* tbl_name;
-	ST_FIELD_INFO* spotter_fields;
 	LEX_STRING* filter;
-	ST_SCHEMA_TABLE* is_spotter;
-
 	void init_filter();
-	void init_fields();
 	bool	init_table(THD* thd);
 	bool fill(THD *thd, TABLE_LIST *tables, COND *unused);
 	bool check(const char* name);

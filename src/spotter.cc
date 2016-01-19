@@ -171,7 +171,8 @@ static struct st_mysql_daemon spotter = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VER
 }
 /* namespace spotter */
 maria_declare_plugin(spotter) {
-MYSQL_INFORMATION_SCHEMA_PLUGIN,
+//MYSQL_INFORMATION_SCHEMA_PLUGIN,
+MYSQL_DAEMON_PLUGIN,
 &spotter::spotter,
 "spotter",
 "Kim Kyungnam",

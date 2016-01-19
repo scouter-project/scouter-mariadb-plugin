@@ -23,12 +23,11 @@ namespace spotter {
 ifs_global_status_reader::ifs_global_status_reader(void* p,std::string name) {
 	tbl_name = name.c_str();
 	interval = 1; // default value
-	plugin_data = p;
-	is_spotter = (ST_SCHEMA_TABLE*)p;
+	plugin_data = p; // not used yet.
+	//is_spotter = (ST_SCHEMA_TABLE*)p;
 	first_read = true;
 	last_read_time = 0;
 	init_filter();
-	init_fields();
 	diff_sec = interval;
 
 }
@@ -38,12 +37,10 @@ ifs_global_status_reader::~ifs_global_status_reader() {
 	for(std::map<std::string,uint64_t*>::iterator it= value_map.begin();it != value_map.end();++it) {
 			delete[] it->second;
 		}
-	delete[] spotter_fields;
-	spotter_fields = 0;
 	delete[] filter;
 	filter = 0;
 }
-
+/*
 void ifs_global_status_reader::init_fields() {
 	spotter_fields = new ST_FIELD_INFO[3];
 	spotter_fields[0] = {"VARIABLE_NAME",   255, MYSQL_TYPE_STRING, 0, 0, 0, 0};
@@ -51,21 +48,22 @@ void ifs_global_status_reader::init_fields() {
 	spotter_fields[2] = {0, 0, MYSQL_TYPE_NULL, 0, 0, 0, 0};
 	is_spotter->fields_info=  spotter_fields; ///< field descriptor
 	is_spotter->idx_field1 = 0;
-}
+}*/
 
 
 bool ifs_global_status_reader::init_table(THD* thd) {
 	lex_start(thd);
 	mysql_init_select(thd->lex);
-	//is_spotter->table_name= tbl_name;
-	is_spotter->table_name= "spotter_status";
 	tables.init_one_table(INFORMATION_SCHEMA_NAME.str,
 						 INFORMATION_SCHEMA_NAME.length,
-						 is_spotter->table_name,
-						 strlen(is_spotter->table_name),
+						 "scouter_status",
+						 strlen("scouter_status"),
 						 0, TL_READ);
 
-	tables.schema_table= is_spotter;
+
+	ST_SCHEMA_TABLE* sch_ib_status= find_schema_table(thd, "global_status");            
+	tables.schema_table = sch_ib_status;
+	tables.schema_table_name = "global_status";
 	tables.table= create_schema_table(thd, &tables); 
 		
 	if (!tables.table) {
@@ -79,8 +77,8 @@ bool ifs_global_status_reader::init_table(THD* thd) {
 
 
 bool ifs_global_status_reader::fill(THD* thd, TABLE_LIST* ptables,COND* unused) {
-  ptables->schema_table= schema_tables + SCH_GLOBAL_STATUS;
-  fill_status(thd, ptables, NULL);
+    ptables->schema_table= schema_tables + SCH_GLOBAL_STATUS;
+    fill_status(thd, ptables, NULL);
 
   /*COND *cond;
   ptables->schema_table= schema_tables + SCH_GLOBAL_STATUS;
@@ -113,6 +111,8 @@ bool ifs_global_status_reader::fill(THD* thd, TABLE_LIST* ptables,COND* unused) 
 				value_map.insert(std::pair<std::string ,uint64_t*>(name,val));
 			}
 		}
+		
+		std::cout<<"name"<<std::endl;
 
     }
 
@@ -302,7 +302,7 @@ int ifs_global_status_reader::execute(void* p) {
 	if(slept_ok(interval)) {
 		while(slept_ok(interval)) {
 			if (my_thread_init()) {
-								return 0;
+				return 0;
 			}
 			thd = new THD();
 			long begin_stack;

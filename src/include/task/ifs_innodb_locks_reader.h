@@ -18,7 +18,6 @@ namespace spotter {
 class ifs_innodb_locks_reader: public task {
 private:
 	const char* tbl_name;
-	ST_SCHEMA_TABLE* is_spotter;
 
 	THD* ib_locks_thd;
 	THD* ib_lock_waits_thd;

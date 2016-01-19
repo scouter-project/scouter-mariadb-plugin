@@ -14,3 +14,4 @@ release
 release
 scp.sh
 configure.scan
+.clang_complete
