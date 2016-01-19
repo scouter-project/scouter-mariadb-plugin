@@ -112,7 +112,6 @@ bool ifs_global_status_reader::fill(THD* thd, TABLE_LIST* ptables,COND* unused) 
 			}
 		}
 		
-		std::cout<<"name"<<std::endl;
 
     }
 
