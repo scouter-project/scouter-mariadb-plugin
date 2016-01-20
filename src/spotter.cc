@@ -166,12 +166,12 @@ static struct st_mysql_sys_var* my_settings[] = {
   NULL
 };
 
-static struct st_mysql_daemon spotter = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
+static struct st_mysql_daemon spotter = { MYSQL_DAEMON_INTERFACE_VERSION };
 
 }
 /* namespace spotter */
 maria_declare_plugin(spotter) {
-MYSQL_INFORMATION_SCHEMA_PLUGIN,
+MYSQL_DAEMON_PLUGIN,
 &spotter::spotter,
 "spotter",
 "Kim Kyungnam",
