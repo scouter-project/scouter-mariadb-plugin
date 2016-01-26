@@ -139,7 +139,7 @@ bool pfs_event_stmt_current_reader::read(){
 			 netproxy->send_pack(pack);
 		}else {
 			 delete pack;
-		  }
+	    }
 		free_root(&mem_field,MYF(0));
 		end_read_record(&read_record_info);
 	  //table->m_needs_reopen= TRUE;

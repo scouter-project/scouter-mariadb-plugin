@@ -56,8 +56,8 @@ pthread_handler_t run(void *arg __attribute__((unused)))
 	spotter_observer->set_interval(5);
 	spotter_observer->run(NULL);
 	my_thread_end();
-  pthread_exit(0);
-  return 0;
+	pthread_exit(0);
+	return 0;
 }
 
 void init_component() {

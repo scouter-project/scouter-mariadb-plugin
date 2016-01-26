@@ -50,6 +50,7 @@ void service_manager::start() {
 	ifs_gstatus_reader->run(NULL);
 	task_list.push_back(ifs_gstatus_reader);
 
+/*
 	task* pfs_current_stmt_reader = new pfs_event_stmt_current_reader();
 	pfs_current_stmt_reader->set_interval(stmt_current_interval) ;
 	pfs_current_stmt_reader->run(NULL);
@@ -69,7 +70,7 @@ void service_manager::start() {
 	heart_beat_checker->set_interval(3);
 	heart_beat_checker->run(NULL);
 	task_list.push_back(heart_beat_checker);
-
+*/
 	running = true;
 
 }
@@ -79,7 +80,6 @@ void service_manager::start() {
 
 void service_manager::stop() {
 	pthread_cond_signal(&spotter_cond);
-	udp_sender::get_instance()->stop();
 
 	running = false;
 	for(std::vector<task*>::iterator it=task_list.begin(); it!=task_list.end();++it) {
@@ -87,6 +87,7 @@ void service_manager::stop() {
 		delete *it;
 	}
 	task_list.clear();
+	udp_sender::get_instance()->stop();
 	pthread_cond_destroy(&spotter_cond);
 }
 

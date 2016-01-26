@@ -305,7 +305,7 @@ int ifs_global_status_reader::execute(void* p) {
 				return 0;
 			}
 			thd = new THD();
-			long begin_stack;
+			long begin_stack=0;
 			thd->thread_stack= (char*) &begin_stack;
 			thd->store_globals();
 			read();
