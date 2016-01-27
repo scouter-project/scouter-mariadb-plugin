@@ -44,14 +44,14 @@ pthread_handler_t run(void *arg __attribute__((unused)))
 	if (my_thread_init()) {
 	    return 0;
 	}
-
 	command_manager* cmd_mgr = command_manager::get_instance();
 	cmd_mgr->run();
 
+/*
 	service_manager* srv_mgr = service_manager::get_instance();
 	srv_mgr->set_plugin_arg(arg);
 	srv_mgr->start();
-
+*/
 	spotter_observer = new observer();
 	spotter_observer->set_interval(5);
 	spotter_observer->run(NULL);

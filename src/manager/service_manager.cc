@@ -40,6 +40,9 @@ service_manager::~service_manager() {
 }
 
 void service_manager::start() {
+	if(running) {
+		return;
+	}
 	udp_sender* sender =  udp_sender::get_instance();
 	sender->start();
 
@@ -79,6 +82,9 @@ void service_manager::start() {
 
 
 void service_manager::stop() {
+	if (running == false) {
+		return ;
+	}
 	pthread_cond_signal(&spotter_cond);
 
 	running = false;

@@ -21,9 +21,9 @@ observer::~observer() {
 int observer::execute(void* p) {
 	while(slept_ok(interval)) {
 		srv_mgr = service_manager::get_instance();
-		if(!plugin_run && srv_mgr->is_run() ) {
+		if(!plugin_run) {
 			srv_mgr->stop();
-		} else if(plugin_run && !srv_mgr->is_run()) {
+		} else if(plugin_run ) {
 			srv_mgr->start();
 		}
 

@@ -26,6 +26,7 @@ pthread_mutex_t command_manager::mutex;
 bool command_manager::connected = false;
 command_manager::command_manager() {
 	connected = false;
+	tcp_sock = NULL;
 
 	thread_id = -1;
 
@@ -211,6 +212,9 @@ bool command_manager::is_connected() {
 }
 
 void command_manager::stop() {
+	if (connected == false) {
+		return;
+	}
 	connected = false;
 	if(thread_id != -1) {
 		pthread_cancel(thread_id);

@@ -42,10 +42,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21
+CMAKE_SOURCE_DIR = /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21
+CMAKE_BINARY_DIR = /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -82,16 +82,6 @@ install/local: preinstall
 install/local/fast: install/local
 .PHONY : install/local/fast
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-.PHONY : install/strip/fast
-
 # Special rule for the target list_install_components
 list_install_components:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Client\" \"ClientPlugins\" \"Common\" \"DataFiles\" \"DebugBinaries\" \"Development\" \"IniFiles\" \"ManPagesClient\" \"ManPagesDevelopment\" \"ManPagesServer\" \"ManPagesTest\" \"Mytop\" \"Readme\" \"Server\" \"Server_Scripts\" \"SharedLibraries\" \"SqlBench\" \"SupportFiles\" \"Test\" \"Unspecified\" \"connect-engine\""
@@ -104,7 +94,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
-	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21 && /usr/bin/cpack --config ./CPackConfig.cmake
+	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug && /usr/bin/cpack --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -114,7 +104,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21 && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21/CPackSourceConfig.cmake
+	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -143,14 +133,14 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21 && $(CMAKE_COMMAND) -E cmake_progress_start /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21/CMakeFiles /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21/plugin/scouter-mariadb-plugin/CMakeFiles/progress.marks
-	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21 && $(MAKE) -f CMakeFiles/Makefile2 plugin/scouter-mariadb-plugin/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21/CMakeFiles 0
+	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug && $(CMAKE_COMMAND) -E cmake_progress_start /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug/CMakeFiles /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug/plugin/scouter-mariadb-plugin/CMakeFiles/progress.marks
+	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug && $(MAKE) -f CMakeFiles/Makefile2 plugin/scouter-mariadb-plugin/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21 && $(MAKE) -f CMakeFiles/Makefile2 plugin/scouter-mariadb-plugin/clean
+	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug && $(MAKE) -f CMakeFiles/Makefile2 plugin/scouter-mariadb-plugin/clean
 .PHONY : clean
 
 # The main clean target
@@ -159,17 +149,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21 && $(MAKE) -f CMakeFiles/Makefile2 plugin/scouter-mariadb-plugin/preinstall
+	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug && $(MAKE) -f CMakeFiles/Makefile2 plugin/scouter-mariadb-plugin/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21 && $(MAKE) -f CMakeFiles/Makefile2 plugin/scouter-mariadb-plugin/preinstall
+	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug && $(MAKE) -f CMakeFiles/Makefile2 plugin/scouter-mariadb-plugin/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -181,7 +171,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
-	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... package"
 	@echo "... package_source"
@@ -198,6 +187,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/windfree/workspace/ws-mariadb/maria-source/mariadb-10.0.21-debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
