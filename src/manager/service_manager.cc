@@ -47,13 +47,12 @@ void service_manager::start() {
 	sender->start();
 
 	pthread_cond_init(&spotter_cond,NULL);
-
+/*
 	task* ifs_gstatus_reader = new ifs_global_status_reader(plugin_arg,std::string("spotter_gstatus"));
 	ifs_gstatus_reader->set_interval(status_interval);
 	ifs_gstatus_reader->run(NULL);
 	task_list.push_back(ifs_gstatus_reader);
 
-/*
 	task* pfs_current_stmt_reader = new pfs_event_stmt_current_reader();
 	pfs_current_stmt_reader->set_interval(stmt_current_interval) ;
 	pfs_current_stmt_reader->run(NULL);
@@ -68,12 +67,11 @@ void service_manager::start() {
 	innodb_lck_reader->set_interval(lock_interval);
 	innodb_lck_reader->run(NULL);
 	task_list.push_back(innodb_lck_reader);
-
+	*/
 	task* heart_beat_checker = new spotter_heartbeat();
 	heart_beat_checker->set_interval(3);
 	heart_beat_checker->run(NULL);
 	task_list.push_back(heart_beat_checker);
-*/
 	running = true;
 
 }

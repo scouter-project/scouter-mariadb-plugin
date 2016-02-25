@@ -13,3 +13,5 @@ release
 release
 scp.sh
 configure.scan
+*.cmake
+Makefile
